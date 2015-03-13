@@ -1,0 +1,27 @@
+.dice {
+	background: url(/static/dices_resized.png);
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	margin-bottom: -16px;
+	margin-top: 20px
+}
+
+.brain {
+	background-position-x: -1px;
+}
+.feet {
+	background-position-x: -40px;
+}
+.shot {
+	background-position-x: -80px;
+}
+.red {
+	background-position-y: 0;
+}
+.yellow {
+	background-position-y: 40;
+}
+.green {
+	background-position-y: 80;
+}

@@ -1,6 +1,7 @@
 # coding=utf8
 from itertools import permutations
-import functools
+from functools import reduce
+from fraction import Fraction
 
 def muliplySets(set_a, set_b):
     '''Возвращает сочетания элементов списков
@@ -30,7 +31,7 @@ def getPermutationProbability(permutations):
 
     total = sum(probability[key] for key in probability)
     for key in probability:
-        probability[key] /= float(total)
+        probability[key] = Fraction(probability[key], total)
 
     return probability
 
@@ -47,7 +48,7 @@ def getFaceProbability(dice, faces_taken):
         else:
             raise Exception('Wrong color: %s' % die)
 
-    set_mul = functools.reduce(muliplySets, face_set)
+    set_mul = reduce(muliplySets, face_set)
 
     probability = getPermutationProbability(set_mul)
 
@@ -70,7 +71,7 @@ def getStats(reds_count=3, yellows_count=4, greens_count=6, dice_taken=3):
 def printDictSorted(dictionary):
     maxlen = max(len(str(key)) for key in dictionary)
     for key, val in reversed(sorted(dictionary.items(), key=lambda x: x[1])):
-        print('%*s: %.5f' % (-maxlen, key, val))
+        print('%*s: %.5f: %s' % (-maxlen, key, val, val))
     print
 
 def main():

@@ -16,12 +16,18 @@
 .shot {
 	background-position-x: -80px;
 }
+.shot.green {
+        background-position-x: -160px;
+}
+.feet.green {
+        background-position-x: -80px;
+}
 .red {
 	background-position-y: 0;
 }
 .yellow {
-	background-position-y: 40;
+	background-position-y: -40px;
 }
 .green {
-	background-position-y: 80;
+	background-position-y: -80px;
 }

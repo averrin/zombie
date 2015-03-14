@@ -1,7 +1,7 @@
 # coding=utf8
 
-class Fraction:
-    '''Класс дробь с числетелем и знаминателем'''
+class Fraction(object):
+    """Класс дробь с числителем и знаминателем"""
     def normalize(self):
         k, d = self.numerator, self.denominator
         while d != 0:

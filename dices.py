@@ -31,7 +31,6 @@ def getPermutationProbability(permutations):
 
     total = sum(probability[key] for key in probability)
     for key in probability:
-        # probability[key] /= float(total)
         probability[key] = Fraction(probability[key], total)
 
     return probability

@@ -9,7 +9,7 @@ def server_static(filename):
 
 @route('/')
 def index():
-	res = '<link rel="stylesheet" href="/static/style.css">'
+	res = '<title>Zombie Dice</title><link rel="stylesheet" href="/static/style.css">'
 	dices = (
 		request.query.red or 3, 
 		request.query.yellow or 4, 
@@ -34,22 +34,24 @@ def index():
 		_dices.extend([d]*dices[i])
 	pool = ', '.join(['<div class="dice brain %s"></div>' % d for d in _dices])
 	print(pool)
-        res += 'on table:' + pool + '<a href="/">clear</a>'
+        res += '<div class="table">on table:' + pool + '</div><a href="/">clear</a>'
 	res += '<ul>'
 	for dices, p in p_list.items():
-		res += '<li>%s &mdash; <b>%s (%s%%)</b></li>' % (', '.join(['<div class="dice %s %s"></div>' % (d, random.choice(['red','yellow','green'])) for d in dices]), p, round(float(p) * 100,2))
-	res += '</ul>'
+		res += '<li>%s &mdash; <b>%s (%s%%)</b></li>' % (
+		    ', '.join(['<div class="dice %s %s"></div>' % (d, 
+		        random.choice(['red','yellow','green'])) for d in dices]), 
+		    p, round(float(p) * 100,2))
+		res += '</ul>'
         res += """<script>
-        function getQueryVariable(variable)
-        {
-               var query = window.location.search.substring(1);
-                      var vars = query.split("&");
-                             for (var i=0;i<vars.length;i++) {
-                                            var pair = vars[i].split("=");
-                                                           if(pair[0] == variable){return pair[1];}
-                                                                  }
-                                                                         return(false);
-                                                                         }
+	        function getQueryVariable(variable){
+	               var query = window.location.search.substring(1);
+	                var vars = query.split("&");
+	                for (var i=0;i<vars.length;i++) {
+	                        var pair = vars[i].split("=");
+	                        if(pair[0] == variable){return pair[1];}
+	                }
+	                return(false);
+	        }
            [].slice.call(document.querySelectorAll('.pool .dice')).forEach(function(e){
               e.addEventListener('click', function(){
                 var q, q1;

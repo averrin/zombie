@@ -2,6 +2,7 @@
 from bottle import *
 from dices import *
 import random
+import operator
 
 @route('/static/<filename>')
 def server_static(filename):
@@ -16,7 +17,8 @@ def index():
         request.query.green or 6
     )
     dices = map(int, dices)
-    p_list = getStats(*dices)
+    p_list = sorted(getStats(*dices).items(), key=lambda x: -float(x[1]))
+    print(p_list)
     print(dices)
     _dices = []
     for i,d in enumerate(['red', 'yellow', 'green']):
@@ -36,7 +38,7 @@ def index():
     print(pool)
     res += '<div class="table"><div class="label">on table:</div>' + pool + '<a href="/"><div class="dice clear"></div></a></div>'
     res += '<ul>'
-    for dices, p in p_list.items():
+    for dices, p in p_list:
         res += '<li>%s &mdash; <b>%s (%s%%)</b></li>' % (
             ', '.join(['<div class="dice %s %s"></div>' % (d, 
                 random.choice(['red','yellow','green'])) for d in dices]), 

@@ -41,7 +41,7 @@ def index():
     for dices, p in p_list:
         res += '<li>%s &mdash; <b>%s (%s%%)</b></li>' % (
             ', '.join(['<div class="dice %s %s"></div>' % (d, 
-                random.choice(['red','yellow','green'])) for d in dices]), 
+                {'shot': 'red', 'feet': 'yellow', 'brain': 'green'}[d]) for d in dices]), 
             p, round(float(p) * 100,2))
     res += '</ul>'
     res += """<script>

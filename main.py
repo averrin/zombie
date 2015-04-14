@@ -16,7 +16,7 @@ def index():
         request.query.yellow or 4, 
         request.query.green or 6
     )
-    dices = map(int, dices)
+    dices = list(map(int, dices))
     p_list = sorted(getStats(*dices).items(), key=lambda x: -float(x[1]))
     print(p_list)
     print(dices)
@@ -106,4 +106,4 @@ def index():
 
     return res
 
-run(port='8888', reloader=True, host='0.0.0.0')
+run(port='80', reloader=True, host='0.0.0.0')
